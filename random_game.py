@@ -1,18 +1,27 @@
 from random import randint
 from time import sleep
+import colorama
+from colorama import Fore, Style
 
-delay = 7
+delay = 5
 
 class User:
     # конструктор
-    def __init__(self, name, power, health, armor):
+    def __init__(self, name):
         self.name = name
-        self.power = power
-        self.health = health
-        self.armor = armor
+    power = 10
+    health = 30
+    armor =2
 
-user1 = User(name="Миша", power=20, health=50, armor=8)
-user2 = User(name="Саша", power=50, health=50, armor=8)
+user1 = User(name="Миша")
+user2 = User(name="Саша")
+
+user1.power = randint(5, 30)
+user2.power = randint(5, 30)
+user1.health = randint(40, 100)
+user2.health = randint(40, 100)
+user1.armor = randint(4, 20)
+user2.armor = randint(4, 20)
 
 print("Знакомьтесь с участниками турнира!")
 print("Первого бойца зовут", user1.name)
@@ -22,16 +31,16 @@ print("Его характеристики:", "Сила =", user2.power, "Жиз
 print("Начинаем битву!!! \n")
 
 def user1_hit():
-    power_hit = randint(10, user1.power)
-    print(user1.name, "ударил с силой =", power_hit)
+    power_hit = randint(1, user1.power)
+    print(Fore.RED + user1.name, "ударил с силой =", power_hit, Style.RESET_ALL)
     if power_hit <= user2.armor:
         print(user2.name, "отразил удар благодатя своей броне")
         power_hit = user2.armor
     user2.health = user2.health - (power_hit - user2.armor)
 
 def user2_hit():
-    power_hit = randint(10, user2.power)
-    print(user2.name, "ударил с силой =", power_hit)
+    power_hit = randint(1, user2.power)
+    print(Fore.BLUE + user2.name, "ударил с силой =", power_hit, Style.RESET_ALL)
     if power_hit <= user1.armor:
         print(user1.name, "отразил удар благодатя своей броне")
         power_hit = user1.armor
